@@ -3,7 +3,7 @@
     {
       "id": "avatar",
       "description": "Professional avatar of Elliee",
-      "imageUrl": "https://picsum.photos/seed/elliee-avatar/600/600",
+      "imageUrl": "/avatar.png",
       "imageHint": "professional woman"
     },
     {
