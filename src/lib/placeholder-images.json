@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "avatar",
+      "description": "Professional avatar of Elliee",
+      "imageUrl": "https://picsum.photos/seed/elliee-avatar/600/600",
+      "imageHint": "professional woman"
+    },
+    {
+      "id": "rag-project",
+      "description": "Agentic RAG System visualization",
+      "imageUrl": "https://picsum.photos/seed/rag-ai/800/600",
+      "imageHint": "AI technology"
+    },
+    {
+      "id": "sql-agent",
+      "description": "SQL Agent Interface",
+      "imageUrl": "https://picsum.photos/seed/sql-agent/800/600",
+      "imageHint": "database code"
+    },
+    {
+      "id": "leafsense",
+      "description": "LeafSense mobile app identification",
+      "imageUrl": "https://picsum.photos/seed/leaf-identification/800/600",
+      "imageHint": "plant leaves"
+    }
+  ]
+}

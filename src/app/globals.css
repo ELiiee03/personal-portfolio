@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 265 43% 19%;
+    --card: 196 100% 96%;
+    --card-foreground: 265 43% 19%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 265 43% 19%;
+    --primary: 250 100% 87%;
+    --primary-foreground: 265 52% 18%;
+    --secondary: 219 55% 91%;
+    --secondary-foreground: 265 43% 19%;
+    --muted: 220 35% 92%;
+    --muted-foreground: 265 20% 36%;
+    --accent: 250 100% 87%;
+    --accent-foreground: 265 52% 18%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 38% 88%;
+    --input: 220 38% 88%;
+    --ring: 250 65% 70%;
+    --radius: 0.5rem;
+
+    /* Pastel lavender / icy blue (reference palette) */
+    --lc-primary: 251 56% 45%; /* deep lavender for structure */
+    --lc-accent: 250 100% 87%; /* #C5BAFF */
+    --lc-surface: 0 0% 98%; /* #FBFBFB */
+    --lc-surface-2: 196 100% 95%; /* #E8F9FF */
+    --lc-border: 220 38% 88%;
+    --lc-text: 265 43% 19%;
+    --lc-muted: 265 20% 36%;
+    --lc-highlight: 219 100% 88%; /* #C4D9FF */
+    --lc-arrow-blue: 251 56% 52%; /* medium visible lavender ~#6E5CD9 */
+    --lc-warning: 33 89% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-bubble-float {
+  animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+@keyframes strokeDraw {
+  0% {
+    stroke-dashoffset: 80;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 80;
+  }
+}
+
+
+.ats-panel {
+  @apply border border-border bg-card shadow-lg p-6 rounded-lg relative overflow-hidden;
+}
+
+.ats-header {
+  @apply font-headline text-2xl tracking-widest text-muted-foreground uppercase mb-8 flex items-center gap-3;
+}
+
+.ats-header::before {
+  content: '//';
+  @apply text-accent font-bold;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────────────────────── */
+:root {
+  --sidebar-node-glow: 0 0 0 3px hsl(251 56% 45% / 0.18), 0 0 10px hsl(251 56% 45% / 0.35);
+  --sidebar-fill-transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-fill-bar {
+  transition: var(--sidebar-fill-transition);
+}
+
+@keyframes nodeGlow {
+  0%, 100% { box-shadow: 0 0 0 3px hsl(251 56% 45% / 0.15), 0 0 8px hsl(251 56% 45% / 0.3); }
+  50%       { box-shadow: 0 0 0 5px hsl(251 56% 45% / 0.25), 0 0 18px hsl(251 56% 45% / 0.5); }
+}
+
+.sidebar-node-active {
+  animation: nodeGlow 2s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full hover:bg-muted/50 transition-colors;
+}
