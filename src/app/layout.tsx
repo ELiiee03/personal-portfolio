@@ -2,10 +2,10 @@ import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Lieca Jane Eleccion | Agentic AI Engineer',
+  title: 'Ellie Dev',
   description: 'Portfolio of Lieca Jane "Elliee" Eleccion — Agentic AI Engineer and RAG developer based in Butuan City, Philippines.',
   openGraph: {
-    title: 'Lieca Jane Eleccion | Agentic AI Engineer',
+    title: 'Ellie Dev',
     description: 'Building agentic AI systems that reason, retrieve, and act.',
     type: 'website',
   }
