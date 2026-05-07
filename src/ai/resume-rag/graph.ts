@@ -1,3 +1,5 @@
+import "@/ai/langsmith-bootstrap";
+
 import {
   AIMessage,
   BaseMessage,

@@ -76,7 +76,12 @@ export async function POST(req: NextRequest) {
         const graph = getPortfolioRagGraph();
         const eventStream = graph.streamEvents(
           { messages: baseMessages },
-          { version: "v2", recursionLimit: 20 },
+          {
+            version: "v2",
+            recursionLimit: 20,
+            tags: ["portfolio-chatbot", "api-chat"],
+            metadata: { route: "POST /api/chat", app: "portfolio" },
+          },
         );
 
         // Buffer tokens from generateQueryOrRespond — we only emit them

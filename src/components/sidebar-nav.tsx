@@ -1,17 +1,28 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { ArrowUpRight, Briefcase, Cpu, FolderKanban, Mail } from "lucide-react";
+import {
+  ArrowUpRight,
+  Briefcase,
+  Cpu,
+  FolderKanban,
+  Mail,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const NAV_SECTIONS = [
-  { id: "experience", label: "EXPERIENCE", Icon: Briefcase    },
-  { id: "skills",     label: "SKILLS",     Icon: Cpu          },
-  { id: "projects",   label: "PROJECTS",   Icon: FolderKanban },
-  { id: "contact",    label: "CONTACT",    Icon: Mail         },
-];
-
 type SectionId = "experience" | "projects" | "skills" | "contact";
+
+const NAV_SECTIONS: ReadonlyArray<{
+  id: SectionId;
+  label: string;
+  Icon: LucideIcon;
+}> = [
+  { id: "experience", label: "EXPERIENCE", Icon: Briefcase },
+  { id: "skills", label: "SKILLS", Icon: Cpu },
+  { id: "projects", label: "PROJECTS", Icon: FolderKanban },
+  { id: "contact", label: "CONTACT", Icon: Mail },
+];
 
 interface SidebarNavProps {
   onChatToggle: () => void;

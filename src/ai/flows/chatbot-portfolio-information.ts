@@ -1,7 +1,10 @@
 'use server';
 /**
- * @fileOverview This file implements a Genkit flow that acts as Elliee's personal AI assistant.
- * It answers questions about her experience, projects, skills, education, and contact information.
+ * @fileOverview Legacy Genkit flow — NOT connected to the chatbot UI.
+ *
+ * The live chatbot uses NVIDIA GLM-4.7 (OpenAI-compatible NIM API) through
+ * a LangGraph RAG pipeline at /api/chat (src/app/api/chat/route.ts).
+ * This Genkit/Gemini flow is kept as a reference but is not imported anywhere.
  *
  * - chatbotPortfolioInformation - The main function to interact with the AI assistant.
  * - ChatbotPortfolioInformationInput - The input type for the chatbotPortfolioInformation function.
@@ -74,10 +77,14 @@ const chatbotPortfolioInformationFlow = ai.defineFlow(
     // Add the current user's message.
     messages.push({ role: 'user', content: input.userMessage });
 
-    // Call the Gemini 1.5 Flash model with the constructed messages.
+    // NOTE: The live chatbot uses NVIDIA GLM-4.7 via LangGraph (/api/chat).
+    // This Genkit flow is a legacy reference using Gemini and is not wired to the UI.
     const { output } = await ai.generate({
-      model: 'googleai/gemini-1.5-flash', // Use Gemini 1.5 Flash as specified
-      messages: messages,
+      model: 'googleai/gemini-2.5-flash',
+      messages: messages.map((m) => ({
+        role: m.role,
+        content: [{ text: m.content }],
+      })),
     });
 
     // Return the AI's response.

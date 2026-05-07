@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Send,
   X,
-  Loader2,
   Sparkles,
   Brain,
   ChevronDown,
@@ -28,6 +27,20 @@ function formatMs(ms: number): string {
   return ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`;
 }
 
+function TypingIndicator() {
+  return (
+    <div className="flex items-center gap-1.5 px-1 py-1">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="h-2 w-2 rounded-full bg-accent animate-bounce"
+          style={{ animationDelay: `${i * 160}ms`, animationDuration: "800ms" }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function ThinkingPanel({
   thoughts,
   isStreaming,
@@ -37,14 +50,18 @@ function ThinkingPanel({
 }) {
   const lines = thoughts.split("\n").filter(Boolean);
   return (
-    <div className="mb-2 overflow-hidden rounded-xl border border-accent/20 bg-lc-surface/60 p-3">
-      <div className="mb-2.5 flex items-center gap-1.5">
-        <Brain className={cn("h-3 w-3 text-accent", isStreaming && "animate-pulse")} />
-        <span className="font-code text-[10px] font-semibold uppercase tracking-widest text-accent">
+    <div className={cn(
+      "mb-2 overflow-hidden rounded-xl border-l-2 border border-accent/50 border-l-accent bg-accent/5 p-3",
+      isStreaming && "shadow-[0_0_16px_0_hsl(var(--accent)/0.18)]",
+    )}>
+      <div className="mb-2.5 flex items-center gap-2">
+        <Brain className={cn("h-3.5 w-3.5 text-accent", isStreaming && "animate-pulse")} />
+        <span className="font-code text-[11px] font-bold uppercase tracking-widest text-accent">
           Thinking
         </span>
         {isStreaming && (
-          <span className="ml-auto font-code text-[9px] text-accent/50 animate-pulse">
+          <span className="ml-auto flex items-center gap-1 font-code text-[9px] text-accent animate-pulse">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             live
           </span>
         )}
@@ -56,11 +73,11 @@ function ThinkingPanel({
             className={cn(
               "flex items-start gap-2 font-code text-[11px] leading-relaxed",
               i === lines.length - 1 && isStreaming
-                ? "text-accent/80"
-                : "text-muted-foreground",
+                ? "text-accent"
+                : "text-foreground/60",
             )}
           >
-            <span className="mt-px select-none text-accent/40">›</span>
+            <span className="mt-px select-none text-accent/60">›</span>
             <span>{line}</span>
             {i === lines.length - 1 && isStreaming && (
               <span className="ml-0.5 inline-block h-3 w-0.5 animate-pulse rounded-sm bg-accent align-middle" />
@@ -324,7 +341,7 @@ export function Chatbot({
                           )}
                         </>
                       ) : msg.isStreaming ? (
-                        <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                        <TypingIndicator />
                       ) : null}
                     </div>
 
@@ -380,16 +397,12 @@ export function Chatbot({
               size="icon"
               className="absolute right-1 top-1 h-9 w-9 rounded-lg bg-accent transition-all hover:bg-lc-highlight"
             >
-              {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Send className="h-4 w-4" />
-              )}
+              <Send className="h-4 w-4" />
             </Button>
           </div>
           <div className="mt-2 text-center">
             <span className="font-code text-[8px] uppercase tracking-widest text-muted-foreground">
-              NVIDIA glm-4.7 · RAG (LangGraph) · streaming
+              Ellie AI can make mistakes. Please double-check responses.
             </span>
           </div>
         </form>
